@@ -1,3 +1,10 @@
+vyatta-webproxy (0.2.110+vyos2+current2+elbandi1) unstable; urgency=low
+
+  [ Andras Elso ]
+  * Can set the cache location
+
+ -- Andras Elso <elso.andras@gmail.com>  Sun, 22 Mar 2020 00:19:47 +0000
+
 vyatta-webproxy (0.2.110+vyos2+current2) unstable; urgency=low
 
   * Bugfix T1054
