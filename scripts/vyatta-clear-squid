@@ -1,7 +1,10 @@
 #!/bin/sh
 
-CACHE="/var/spool/squid"
+CACHE=`cli-shell-api returnEffectiveValue service webproxy cache-location`
 PID=`cat /var/run/squid.pid 2>/dev/null`
+if test -z "$CACHE"; then
+    CACHE="/var/spool/squid"
+fi
 
 if test -n "$PID"; then 
    /etc/init.d/squid stop

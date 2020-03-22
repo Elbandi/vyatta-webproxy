@@ -42,7 +42,6 @@ use strict;
 my $squid_conf      = '/etc/squid/squid.conf';
 my $local_conf      = '/etc/squid/local.conf';
 my $squid_log       = '/var/log/squid/access.log';
-my $squid_cache_dir = '/var/spool/squid';
 my $squid_def_fs    = 'ufs';
 my $squid_def_port  = 3128;
 my $squid_chain     = 'WEBPROXY_CONNTRACK';
@@ -133,6 +132,10 @@ sub squid_validate_conf {
     # commands.
     #
     $config->setLevel('service webproxy');
+    my $squid_cache_dir = $config->returnValue('cache-location');
+    if (!defined $squid_cache_dir) {
+        $squid_cache_dir = '/var/spool/squid';
+    }
     my $cache_size = $config->returnValue('cache-size');
     if (!defined $cache_size) {
         print "Must define cache-size\n";
@@ -239,6 +242,8 @@ sub squid_get_values {
         $output .= "http_reply_access deny BLOCK_MIME\n\n";
     }
 
+    my $squid_cache_dir = $config->returnValue('cache-location');
+    $squid_cache_dir = '/var/spool/squid' if !defined $squid_cache_dir;
     my $cache_size = $config->returnValue('cache-size');
     $cache_size = 100 if !defined $cache_size;
     if ($cache_size > 0) {

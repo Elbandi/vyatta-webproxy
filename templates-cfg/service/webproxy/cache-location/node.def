@@ -1,0 +1,7 @@
+type: txt
+
+help: Cache files location
+
+default: "/var/spool/squid"
+
+val_help: Location (default /var/spool/squid)
