@@ -245,6 +245,14 @@ sub squid_get_values {
     $o_def_port = $squid_def_port if !defined $o_def_port;
     $n_def_port = $squid_def_port if !defined $n_def_port;
 
+    my @refresh_pattern = $config->returnValues('always-cache keyword');
+    if (scalar(@refresh_pattern)) {
+        foreach my $keyword (@refresh_pattern) {
+            $output .= "refresh_pattern $keyword  129600 100% 129600\n";
+        }
+        $output .= "refresh_pattern . 0 0% 0\n\n";
+    }
+
     my @block_mime_types = $config->returnValues('reply-block-mime');
     if (scalar(@block_mime_types)) {
         foreach my $mime (@block_mime_types) {

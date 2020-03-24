@@ -1,0 +1,7 @@
+multi:
+
+type: txt
+
+help: Keyword to cache
+
+val_help: Keyword (or regex) to cache always
