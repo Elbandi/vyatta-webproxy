@@ -60,7 +60,6 @@ sub squid_get_constants {
 
     $output .= "acl localhost src 127.0.0.1/32\n";
     $output .= "acl to_localhost dst 127.0.0.0/8\n";
-    $output .= "acl net src all\n";
     $output .= "acl SSL_ports port 443\n";
     $output .= "acl Safe_ports port 80          # http\n";
     $output .= "acl Safe_ports port 21          # ftp\n";
@@ -84,9 +83,21 @@ sub squid_get_constants {
 }
 
 sub squid_get_http_access_constants {
-    my $output;
+    my $config = new Vyatta::Config;
+    my $output = '';
 
-    $output  = "http_access allow manager localhost\n";
+    # add allow-from
+    $config->setLevel('service webproxy allow-from');
+    my @allow_from = $config->returnValues();
+    if (scalar(@allow_from) > 0) {
+        foreach my $ip (@allow_from) {
+            $output .= "acl net src $ip\n";
+        }
+    } else {
+        $output .= "acl net src all\n";
+    }
+
+    $output .= "http_access allow manager localhost\n";
     $output .= "http_access deny manager\n";
     $output .= "http_access deny !Safe_ports\n";
     $output .= "http_access deny CONNECT !SSL_ports\n";
