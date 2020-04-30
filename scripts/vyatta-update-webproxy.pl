@@ -250,7 +250,7 @@ sub squid_get_values {
         foreach my $keyword (@refresh_pattern) {
             $output .= "refresh_pattern $keyword  129600 100% 129600\n";
         }
-        $output .= "refresh_pattern . 0 0% 0\n\n";
+        $output .= "refresh_pattern . 0 0% 0 override-expire refresh-ims\n\n";
     }
 
     my @block_mime_types = $config->returnValues('reply-block-mime');
