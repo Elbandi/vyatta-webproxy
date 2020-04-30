@@ -409,6 +409,12 @@ sub squid_get_values {
     $forwarded_for = "off" if !defined $forwarded_for;
     $output .= "forwarded_for $forwarded_for\n\n";
 
+    # Via header
+    my $via_header = $config->returnValue('via-header');
+    if (defined $via_header and $via_header eq 'off') {
+        $output .= "via off\n\n";
+    }
+
     #
     # check if squidguard is configured
     #

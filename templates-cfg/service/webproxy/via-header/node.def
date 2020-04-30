@@ -1,0 +1,6 @@
+type: txt
+help: Configure Via header option (default: on)
+val_help: on; include a Via header in requests
+val_help: off; not include a Via header in requests
+allowed: echo "on off"
+syntax:expression: exec "${vyos_libexec_dir}/validate-value.py --regex \'(on|off)\'  --value \'$VAR(@)\'"; "Must be either 'on' or 'off'"
