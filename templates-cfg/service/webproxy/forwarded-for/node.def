@@ -1,0 +1,9 @@
+type: txt
+help: How to handle X-Forwarded-For header in the HTTP requests (default: on)
+val_help: on; append your client's IP address
+val_help: off; append header with client ip unknown
+val_help: transparent; not alter the header in any way
+val_help: delete; delete the entire header
+val_help: truncate; remove all existing entries, and place the client IP as the sole entry
+allowed: echo "on off transparent delete truncate"
+syntax:expression: exec "${vyos_libexec_dir}/validate-value.py --regex \'(on|off|transparent|delete|truncate)\'  --value \'$VAR(@)\'"; "Invalid value"

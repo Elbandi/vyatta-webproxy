@@ -405,7 +405,9 @@ sub squid_get_values {
     #
     # default to NOT insert the client address in X-Forwarded-For header
     #
-    $output .= "forwarded_for off\n\n";
+    my $forwarded_for = $config->returnValue('forwarded-for');
+    $forwarded_for = "off" if !defined $forwarded_for;
+    $output .= "forwarded_for $forwarded_for\n\n";
 
     #
     # check if squidguard is configured
