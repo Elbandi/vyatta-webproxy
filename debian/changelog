@@ -1,3 +1,12 @@
+vyatta-webproxy (0.2.110+vyos2+current2+elbandi2) unstable; urgency=medium
+
+  [ Andras Elso ]
+  * Allow configure X-Forwarded-For header
+  * Configure via header
+  * Add override-expire refresh-ims parameters for default refresh_pattern
+
+ -- Andras Elso <elso.andras@gmail.com>  Fri, 01 May 2020 00:02:48 +0000
+
 vyatta-webproxy (0.2.110+vyos2+current2+elbandi1) unstable; urgency=low
 
   [ Andras Elso ]
