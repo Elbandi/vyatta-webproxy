@@ -156,7 +156,7 @@ sub squid_validate_conf {
     chomp $free_disk;
     if ($free_disk =~ /(\d+)M/) {
         if ($cache_size >= $1) {
-            print "cache-size must be less than free disk space in /var/spool\n";
+            print "cache-size must be less than free disk space in $squid_cache_dir\n";
             exit 1;
         }
     }
